@@ -1,12 +1,13 @@
 ﻿//Класс Book.
 
-namespace LibraryManagement.Domain
+namespace LibraryManagement.Domain.Entities
+//namespace LibraryManagement.Domain.LibraryManagement.Domain
 {
     public class Book
     {
-        public uint ID;                             // Идентификатор
-        public string Title;                        // Наименование
-        public enum AgeRestriction                  // Возрастные ограничения
+        public uint ID;                                         // Идентификатор
+        public string Title { get; set; } = string.Empty;       // Наименование
+        public enum AgeRestriction                              // Возрастные ограничения
         {
             G = 0,      // Для всех возрастов
             PG = 7,     // С 7 лет
@@ -22,10 +23,10 @@ namespace LibraryManagement.Domain
             public AgeRating Rating { get; set; }
         }
         */
-        public uint StandardLoanDurationInDays;     // Стандартный срок выдачи книг (в днях)
-        public uint DailyFineRate;                  // Дневная ставка штрафа
-        public uint AuthorId;                       // Идентификатор автора
-        public string Author;                       // Автор
+        public uint StandardLoanDurationInDays { get; set; }     // Стандартный срок выдачи книг (в днях)
+        public uint DailyFineRate { get; set; }                  // Дневная ставка штрафа
+        public uint AuthorId { get; set; }                       // Идентификатор автора
+        public string Author { get; set; } = string.Empty;       // Автор
     }
 }
 
