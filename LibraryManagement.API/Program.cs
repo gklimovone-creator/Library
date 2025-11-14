@@ -22,6 +22,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 var app = builder.Build();
 
+app.Map("/test-settings", (IConfiguration config) => 
+    $"Библиотека: {config["LibrarySettings:LibraryName"]}");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -32,3 +35,4 @@ app.UseRouting();
 app.MapControllers(); // ← И ЭТО ВАЖНО!
 
 app.Run();
+
