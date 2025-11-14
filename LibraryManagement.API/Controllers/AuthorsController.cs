@@ -27,14 +27,14 @@ namespace LibraryManagement.API.Controllers
             // Логируем что пришло
             Console.WriteLine($"Received author: {System.Text.Json.JsonSerializer.Serialize(author)}");
 
-            author.Id = _authors.Count + 1;
+            author.Author_id = _authors.Count + 1;
             _authors.Add(author);
 
             // Логируем что сохранили
             Console.WriteLine($"Saved authors count: {_authors.Count}");
             foreach (var a in _authors)
             {
-                Console.WriteLine($"  - {a.Id}: {a.FullName}, {a.Country}, {a.Email}");
+                Console.WriteLine($"  - {a.Author_id}: {a.Full_name}, {a.Country}, {a.Email}");
             }
 
             return Ok(new

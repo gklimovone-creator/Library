@@ -1,32 +1,48 @@
 ﻿//Класс Book.
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace LibraryManagement.Domain.Entities
-//namespace LibraryManagement.Domain.LibraryManagement.Domain
 {
+    public enum Age_restriction
+    // Возрастные ограничения
+    {
+        G = 0,      // Для всех возрастов
+        PG = 7,     // С 7 лет
+        PG13 = 13,  // С 13 лет
+        R = 17,     // С 17 лет
+        NC17 = 18   // С 18 лет
+    }
+    // Использование в модели
+    /*
     public class Book
     {
-        public uint ID;                                         // Идентификатор
+        public string Title { get; set; }
+        public AgeRating Rating { get; set; }
+    }
+    */
+
+    [Table("Book")]
+    public class Book
+    {
+        [Key]
+        [Column("book_id")]
+        public uint Book_id { get; set; }                       // Идентификатор книги
+        
+        [ForeignKey("Author")]
+        [Column("author_id")]
+        public int Author_id { get; set; }                      // Идентификатор автора
+        
+        [Column("title")]
         public string Title { get; set; } = string.Empty;       // Наименование
-        public enum AgeRestriction                              // Возрастные ограничения
-        {
-            G = 0,      // Для всех возрастов
-            PG = 7,     // С 7 лет
-            PG13 = 13,  // С 13 лет
-            R = 17,     // С 17 лет
-            NC17 = 18   // С 18 лет
-        }
-        // Использование в модели
-        /*
-        public class Book
-        {
-            public string Title { get; set; }
-            public AgeRating Rating { get; set; }
-        }
-        */
-        public uint StandardLoanDurationInDays { get; set; }     // Стандартный срок выдачи книг (в днях)
-        public uint DailyFineRate { get; set; }                  // Дневная ставка штрафа
-        public uint AuthorId { get; set; }                       // Идентификатор автора
-        public string Author { get; set; } = string.Empty;       // Автор
+        
+        [Column("age_restriction")]
+        public Age_restriction Age_restriction { get; set; }
+
+
+        [Column("daily_fine_rate")]
+        public uint Daily_fine_rate { get; set; }                  // Дневная ставка штрафа
     }
 }
 
