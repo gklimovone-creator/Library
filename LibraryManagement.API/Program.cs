@@ -1,4 +1,4 @@
-﻿using LibraryManagement.API;
+﻿using LibraryManagement.Domain.LibraryManagement.Domain.Entities;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);

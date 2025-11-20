@@ -1,4 +1,5 @@
 using LibraryManagement.Domain.Entities;
+using LibraryManagement.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagement.API.Controllers
@@ -8,12 +9,26 @@ namespace LibraryManagement.API.Controllers
     public class AuthorsController : ControllerBase
     {
         private static readonly List<Author> _authors = new();
+        private readonly ILibrarySettingsService _librarySettingsService;
 
         // GET: api/authors
         [HttpGet]
         public IActionResult GetAllAuthors()
         {
             return Ok(_authors);
+        }
+
+        public AutorsController(ILibrarySettingsService librarySettingsService)
+        {
+            _librarySettingsService = librarySettingsService;
+        }
+        public IActionResult GetLibrarySettings()
+        {
+            return Ok(new { 
+                LibraryName = _librarySettingsService.Settings.LibraryName,
+                DefaultLoanDays = _librarySettingsService.Settings.DefaultLoanDays,
+                MaxBooksPerUser = _librarySettingsService.Settings.MaxBooksPerUse
+            });
         }
 
         [HttpPost]
