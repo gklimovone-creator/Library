@@ -1,4 +1,14 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using LibraryManagement.API;
+using Microsoft.Extensions.Options;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Регистрируем LibrarySettings в DI контейнере, привязывая к секции "LibrarySettings" в appsettings.json
+builder.Services.Configure<LibrarySettings>(builder.Configuration.GetSection("LibrarySettings"));
+
+// Регистрируем сервис для доступа к настройкам
+builder.Services.AddScoped<LibrarySettingsService, LibrarySettingsService>();
+
 
 // Add services to the container.
 builder.Services.AddControllers()
@@ -22,8 +32,15 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 var app = builder.Build();
 
-app.Map("/test-settings", (IConfiguration config) => 
-    $"Библиотека: {config["LibrarySettings:LibraryName"]}");
+//app.Map("/settings", (IOptions<LibrarySettings> settings) =>
+app.Map("/settings", (LibrarySettingsService settingsService) =>
+
+{
+    // Просто возвращаем JSON с настройками из сервиса
+    return Results.Json(settingsService.GetSettings());
+});
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
