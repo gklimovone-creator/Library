@@ -3,7 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LibraryManagement.API
+namespace LibraryManagement.Domain.LibraryManagement.Domain.Entities
 {
     public class LibrarySettings
     {

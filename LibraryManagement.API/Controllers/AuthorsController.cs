@@ -9,7 +9,7 @@ namespace LibraryManagement.API.Controllers
     public class AuthorsController : ControllerBase
     {
         private static readonly List<Author> _authors = new();
-        private readonly ILibrarySettingsService _librarySettingsService;
+        //private readonly ILibrarySettingsService _librarySettingsService;
 
         // GET: api/authors
         [HttpGet]
@@ -18,18 +18,18 @@ namespace LibraryManagement.API.Controllers
             return Ok(_authors);
         }
 
-        public AutorsController(ILibrarySettingsService librarySettingsService)
-        {
-            _librarySettingsService = librarySettingsService;
-        }
-        public IActionResult GetLibrarySettings()
-        {
-            return Ok(new { 
-                LibraryName = _librarySettingsService.Settings.LibraryName,
-                DefaultLoanDays = _librarySettingsService.Settings.DefaultLoanDays,
-                MaxBooksPerUser = _librarySettingsService.Settings.MaxBooksPerUse
-            });
-        }
+        //public AutorsController(ILibrarySettingsService librarySettingsService)
+        //{
+        //    _librarySettingsService = librarySettingsService;
+        //}
+        //public IActionResult GetLibrarySettings()
+        //{
+        //    return Ok(new { 
+        //        LibraryName = _librarySettingsService.Settings.LibraryName,
+        //        DefaultLoanDays = _librarySettingsService.Settings.DefaultLoanDays,
+        //        MaxBooksPerUser = _librarySettingsService.Settings.MaxBooksPerUse
+        //    });
+        //}
 
         [HttpPost]
         public IActionResult CreateAuthor([FromBody] Author author)

@@ -1,11 +1,11 @@
 ﻿//Интерфейс
 
-using LibraryManagement.Entities;
-
-namespace LibraryManagement.Domain
+namespace LibraryManagement.Domain.Interfaces
 {
     public interface ILibrarySettingsService
     {
-        LibrarySettings Settings { get; }
+        string GetLibraryName();
+        int GetDefaultLoanDays();
+        decimal GetDailyFineRate();
     }
 }

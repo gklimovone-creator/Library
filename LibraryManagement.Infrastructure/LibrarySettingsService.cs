@@ -1,24 +1,19 @@
-﻿
-//Класс LibrarySettingsServece
+﻿using Microsoft.Extensions.Configuration;
+using LibraryManagement.Domain.Interfaces;
 
-using LibraryManagement.API;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ILibrarySettingsServece
+namespace LibraryManagement.Infrastructure.Services
 {
-    public class LibrarySettingsServece : ILibrarySettingsServece
+    public class LibrarySettingsService : ILibrarySettingsService
     {
-        public LibrarySettingsServece Settings { get; }
-        public LibrarySettingsServece(IConfiguration config) 
+        private readonly IConfiguration _configuration;
+
+        public LibrarySettingsService(IConfiguration configuration)
         {
-            Settings = config.GetSection("LibrarySettings").Get<LibrarySettingsServece>();
+            _configuration = configuration;
         }
+
+        public string GetLibraryName() => _configuration["LibrarySettings:LibraryName"];
+        public int GetDefaultLoanDays() => int.Parse(_configuration["LibrarySettings:DefaultLoanDays"]);
+        public decimal GetDailyFineRate() => decimal.Parse(_configuration["LibrarySettings:DailyFineRate"]);
     }
-}
-
-
-public interface LibrarySettingsService
-{
-    LibrarySettings GetSettings(); // Метод для получения экземпляра класса настроек
 }
